@@ -50,7 +50,8 @@ function New-ClientUserSettings {
         exit  
     }
             
-
+    #region Make XML
+    
     $dec = $Doc.CreateXmlDeclaration("1.0","UTF-8",$null)
     $doc.AppendChild($dec)  | Out-Null 
 
@@ -99,9 +100,13 @@ function New-ClientUserSettings {
     $root.AppendChild($appSet)  | Out-Null
     $doc.AppendChild($root)  | Out-Null
 
-    #save file
+    #endregion
+
+    #region Save XML
     $FileName = $Path + $Server + "-" + $ServerInstance + ".config"
-    $doc.save($FileName)   | Out-Null    
+    $doc.save($FileName)   | Out-Null 
+    #endregion
+       
     Write-Host "Finished! File located at $FileName" -ForegroundColor Green
 
     return $FileName
